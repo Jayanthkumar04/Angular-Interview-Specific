@@ -1,0 +1,13 @@
+1)How do you structure Angular projects in real-time applications?
+We follow a feature-based architecture with core, shared, and feature modules to improve scalability and maintainability.
+
+2)Why do we create models in Angular?
+Models provide type safety and help catch errors at compile time.
+
+3)Why HttpClient instead of fetch?
+HttpClient supports interceptors, observables, and automatic JSON parsing.
+
+4)What happens inside ngOnInit?
+ngOnInit runs after component initialization and is used to fetch initial data.
+
+5)

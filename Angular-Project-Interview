@@ -10,4 +10,17 @@ HttpClient supports interceptors, observables, and automatic JSON parsing.
 4)What happens inside ngOnInit?
 ngOnInit runs after component initialization and is used to fetch initial data.
 
-5)
+5)loadUser(id:number)
+  {
+    this.userService.getUserById(id).subscribe(user => {
+      this.userForm.patchValue(user);
+    });
+  }
+What does patchValue() mean?
+
+patchValue() is a Reactive Forms method used to update form values partially.
+
+6)how to create a routing module file
+ ng g module features/user --routing
+
+

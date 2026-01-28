@@ -33,4 +33,8 @@ With Pipe
 {{ user.role | roleDisplay }}  o/p==> Administrator
 
 
+8)What is a directive in Angular?
 
+✅ Simple Interview Answer
+
+A directive is a class that allows us to add behavior or modify the appearance of DOM elements.

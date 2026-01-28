@@ -1,0 +1,75 @@
+📁 Location (Company Standard)
+src/app/shared/pipes/
+
+✅ 4.1 Generate Pipe
+ng generate pipe shared/pipes/roleDisplay
+
+4.2 role-display.pipe.ts
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'roleDisplay'
+})
+export class RoleDisplayPipe implements PipeTransform {
+
+  transform(value: string): string {
+    if (!value) return '';
+
+    return value === 'ADMIN'
+      ? 'Administrator'
+      : 'Normal User';
+  }
+}
+
+Q)How do you create a custom pipe in Angular?
+
+✅ Answer
+
+By using @Pipe decorator and implementing PipeTransform.
+
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'roleDisplay'
+})
+export class RoleDisplayPipe implements PipeTransform {
+
+  transform(value: string): string {
+    if (!value) return '';
+
+    return value === 'ADMIN'
+      ? 'Administrator'
+      : 'Normal User';
+  }
+}
+Declare Pipe (IMPORTANT)
+
+If module-based:
+
+declarations: [RoleDisplayPipe]
+
+Q)Can pipes accept parameters?
+
+✅ Answer
+
+Yes, pipes can accept parameters after colon.
+
+    <h1>Parameterized Custom Pipes</h1>
+
+    <h4>{{num1|multiplyPipe:2}}</h4>
+
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'multiplyPipe',
+  standalone: true
+})
+export class MultiplyPipePipe implements PipeTransform {
+
+  transform(value: number,factor:number): number {
+    return value * factor;
+  }
+
+}
+
+

@@ -23,4 +23,14 @@ patchValue() is a Reactive Forms method used to update form values partially.
 6)how to create a routing module file
  ng g module features/user --routing
 
+7)What is a pipe in Angular?
+A pipe is used to transform data in the template before displaying it to the user.
+Pipe does not change the original data, only the view.
+
+Example (Without Pipe)
+{{ user.role }} o/p=> ADMIN
+With Pipe
+{{ user.role | roleDisplay }}  o/p==> Administrator
+
+
 

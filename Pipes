@@ -1,0 +1,58 @@
+What is a pipe in Angular?
+A pipe is used to transform data in the template before displaying it to the user.
+Pipe does not change the original data, only the view.
+
+Example (Without Pipe)
+{{ user.role }} o/p=> ADMIN
+With Pipe
+{{ user.role | roleDisplay }}  o/p==> Administrator
+
+Date Pipe
+
+  date:Date= new Date(2001,7,4)  (7 = august 0 based index)
+shortDate   mediumDate  longDate  fullDate  shortTime   mediumTime   longTime
+
+If the date comes from an API (string → Date)
+this.date = new Date(apiResponse.date);
+
+<h4>{{date|date:'shortDate'}}</h4>
+   <h4>{{date|date:'fullDate'}}</h4>
+
+<td>{{ event.eventDate | date:'dd-MMM-yyyy hh:mm a' }}</td>
+
+UpperCase / LowerCase Pipe
+{{ user.name | uppercase }}
+{{ user.name | lowercase }}
+{{ user.name | titlecase }}
+Currency Pipe
+{{ event.price | currency:'INR' }}
+
+Slice Pipe
+{{ user.name | slice:0:5 }}
+
+decimal pipe
+{{ 1234.567 | number }}
+
+number:'minInteger.minFraction-maxFraction'
+
+1. What is the JSON Pipe?
+
+The JSON pipe is used to display an object or array as readable JSON text in the template.
+
+users = [
+  { id: 1, name: 'John' },
+  { id: 2, name: 'Sara' }
+];
+Output:
+
+[
+  {
+    "id": 1,
+    "name": "John"
+  },
+  {
+    "id": 2,
+    "name": "Sara"
+  }
+]
+

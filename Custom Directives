@@ -1,0 +1,128 @@
+8)What is a directive in Angular?
+
+✅ Simple Interview Answer
+
+A directive is a class that allows us to add behavior or modify the appearance of DOM elements.
+Custom directives help reuse DOM-related logic across components.
+types
+1)Component Directive 
+2)Structural Directive Changes DOM 
+3)Attribute Directive Changes appearance (ngClass, ngStyle)
+Custom directives are usually attribute directives.
+
+📁 Folder (Company Standard)
+src/app/shared/directives/
+
+✅ 4.1 Generate Directive
+ng generate directive shared/directives/highlightPrice
+
+✅ 4.2 highlight-price.directive.ts
+import { Directive, ElementRef, Input, OnInit } from '@angular/core';
+
+✅Input() name must match with the selector
+@Directive({
+  selector: '[appHighlightPrice]'
+})
+export class HighlightPriceDirective implements OnInit {
+
+  @Input() appHighlightPrice!: number;
+
+  constructor(private el: ElementRef) {}
+
+  ngOnInit(): void {
+    if (this.appHighlightPrice > 5000) {
+      this.el.nativeElement.style.backgroundColor = '#ffe6e6';
+      this.el.nativeElement.style.fontWeight = 'bold';
+    }
+  }
+}
+
+4.3 Use Directive in HTML (Event List)
+event-list.component.html
+<tr *ngFor="let event of events">
+  <td>{{ event.eventName }}</td>
+
+  <td [appHighlightPrice]="event.price">
+    {{ event.price | currency:'INR' }}
+  </td>
+
+  <td>{{ event.eventDate | date:'dd-MMM-yyyy' }}</td>
+</tr>
+
+
+=========
+How do you pass data to a directive?
+
+✅ Answer
+
+Using @Input() in the directive.
+
+✅
+5. HostListener – Handle Events (IMPORTANT)
+
+Let’s add hover effect.
+
+import { Directive, ElementRef, HostListener } from '@angular/core';
+
+@Directive({
+  selector: '[appHoverHighlight]'
+})
+export class HoverHighlightDirective {
+
+  constructor(private el: ElementRef) {}
+
+  @HostListener('mouseenter')
+  onMouseEnter() {
+    this.el.nativeElement.style.backgroundColor = '#d1f2eb';
+  }
+
+  @HostListener('mouseleave')
+  onMouseLeave() {
+    this.el.nativeElement.style.backgroundColor = '';
+  }
+}
+
+Usage
+<tr appHoverHighlight>
+
+==============================
+
+What is HostListener?
+
+✅ Answer
+
+HostListener listens to DOM events on the host element.
+
+=========================
+✅
+6. HostBinding – Bind Properties (ADVANCED)
+
+Instead of ElementRef.style 👇
+
+✅ Cleaner Directive Using HostBinding
+import { Directive, HostBinding, HostListener } from '@angular/core';
+
+@Directive({
+  selector: '[appHoverHighlight]'
+})
+export class HoverHighlightDirective {
+
+  @HostBinding('style.backgroundColor') bgColor = '';
+
+  @HostListener('mouseenter')
+  onEnter() {
+    this.bgColor = '#f9e79f';
+  }
+
+  @HostListener('mouseleave')
+  onLeave() {
+    this.bgColor = '';
+  }
+}
+
+Q)Difference between ElementRef and HostBinding?
+
+✅ Answer
+
+ElementRef directly accesses DOM, HostBinding binds properties in a safer way.
+

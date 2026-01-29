@@ -38,3 +38,12 @@ With Pipe
 ✅ Simple Interview Answer
 
 A directive is a class that allows us to add behavior or modify the appearance of DOM elements.
+Custom directives help reuse DOM-related logic across components.
+types
+1)Component Directive 2)Structural Directive 3)Attribute Directive (ngClass, ngStyle)
+
+
+
+
+
+

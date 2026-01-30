@@ -1,0 +1,10 @@
+app/
+ ├── app.component (Parent)
+ │
+ ├── product-list (Child → Parent)
+ │
+ ├── product-detail (Parent → Child)
+ │
+ └── shared/product.service (Service-based sharing)
+
+

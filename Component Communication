@@ -8,3 +8,102 @@ app/
  └── shared/product.service (Service-based sharing)
 
 
+
+STEP 1: PARENT → CHILD (@Input())
+Use case
+
+Parent selects a product → Child displays details
+
+👨‍👦 Parent: app.component.ts
+import { Component } from '@angular/core';
+import { Product } from './product.model';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html'
+})
+export class AppComponent {
+
+  selectedProduct!: Product;
+
+  onProductSelected(product: Product) {
+    this.selectedProduct = product;
+  }
+}
+
+
+👨‍👦 Parent Template: app.component.html
+<h2>Product Dashboard</h2>
+
+<app-product-list (productSelected)="onProductSelected($event)">
+</app-product-list>
+
+<hr>
+
+<app-product-detail [product]="selectedProduct">
+</app-product-detail>
+
+
+
+👶 Child: product-detail.component.ts
+import { Component, Input } from '@angular/core';
+import { Product } from '../product.model';
+
+@Component({
+  selector: 'app-product-detail',
+  templateUrl: './product-detail.component.html'
+})
+export class ProductDetailComponent {
+
+  @Input() product!: Product;
+}
+
+
+
+👶 Child Template: product-detail.component.html
+<div *ngIf="product">
+  <h3>Product Details</h3>
+  <p>Name: {{ product.name }}</p>
+  <p>Price: {{ product.price }}</p>
+</div>
+
+
+======================================
+2)
+🔹 STEP 2: CHILD → PARENT (@Output())
+Use case
+
+Child list emits selected product → Parent receives it
+
+👶 Child: product-list.component.ts
+import { Component, EventEmitter, Output } from '@angular/core';
+import { Product } from '../product.model';
+
+@Component({
+  selector: 'app-product-list',
+  templateUrl: './product-list.component.html'
+})
+export class ProductListComponent {
+
+  @Output() productSelected = new EventEmitter<Product>();
+
+  products: Product[] = [
+    { id: 1, name: 'Laptop', price: 60000 },
+    { id: 2, name: 'Phone', price: 30000 },
+    { id: 3, name: 'Tablet', price: 20000 }
+  ];
+
+  selectProduct(product: Product) {
+    this.productSelected.emit(product);
+  }
+}
+
+👶 Child Template: product-list.component.html
+<h3>Products</h3>
+
+<ul>
+  <li *ngFor="let p of products"
+      (click)="selectProduct(p)">
+    {{ p.name }}
+  </li>
+</ul>
